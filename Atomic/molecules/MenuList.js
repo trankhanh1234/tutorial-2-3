@@ -14,7 +14,6 @@ import MenItem from "../atoms/MenItem";
 
 function MenuList(props) {
   const router = useRouter();
-  console.log(router);
   const listMenu = [
     {
       label: "Thông tin tài khoản",
@@ -48,10 +47,6 @@ function MenuList(props) {
     },
   ];
 
-  React.useEffect(() => {
-    console.log("useEffect");
-    // return handleMenuActive();
-  }, [router]);
   return (
     <>
       {listMenu.map((item, index) => (
