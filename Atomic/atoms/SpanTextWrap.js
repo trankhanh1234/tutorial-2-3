@@ -12,6 +12,7 @@ function SpanTextWrap({ children, rest }) {
 export default SpanTextWrap;
 SpanTextWrap.propTypes = {
   children: PropTypes.any,
+  rest: PropTypes.any,
 };
 
 SpanTextWrap.defaultProps = {

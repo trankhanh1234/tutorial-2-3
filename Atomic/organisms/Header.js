@@ -7,17 +7,16 @@ import {
   Cart,
   Wallet,
   BoxArrowInLeft,
+  BoxArrowInRight,
 } from "react-bootstrap-icons";
 import Dropdown from "react-bootstrap/Dropdown";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Overlay from "react-bootstrap/Overlay";
 import Popover from "react-bootstrap/Popover";
 
 import Logo from "../atoms/Logo";
 import SpanTextWrap from "../atoms/SpanTextWrap";
-import DropDownMenu from "../molecules/DropDownMenu";
 import InputSearch from "../molecules/InputSearch";
-import DropDownItem from "../atoms/DropDownItem";
+import ModelLogin from "./ModelLogin";
 
 const HeaderNavLeft = () => {
   const [state, setState] = React.useState("Hồ Chí Minh");
@@ -74,12 +73,16 @@ const HeaderNavLeft = () => {
 };
 const HeaderNavRight = () => {
   const [show, setShow] = React.useState(false);
+  const [modalShow, setModalShow] = React.useState(false);
 
   const target = React.useRef(null);
   const menu = [
     { text: "Thông tin tài khoản", icon: <Bank /> },
     { text: "Ví", icon: <Wallet></Wallet> },
-    { text: "Đăng Xuất", icon: <BoxArrowInLeft></BoxArrowInLeft> },
+    {
+      text: "Đăng Xuất",
+      icon: <BoxArrowInLeft></BoxArrowInLeft>,
+    },
   ];
   const handleLocation = () => {
     setShow(false);
@@ -114,21 +117,33 @@ const HeaderNavRight = () => {
             {(props) => (
               <Popover placement="bottom" id="overlay-example" {...props}>
                 {menu.map((item, index) => (
-                  <>
-                    <Dropdown.Item
-                      onClick={handleLocation}
-                      eventKey="1"
-                      key={`menu-${index}`}
-                    >
-                      <div className="my-3 d-flex">
-                        <div className="mr-3">{item.icon}</div>
-                        <div>
-                          <p>{item.text}</p>
-                        </div>
+                  <Dropdown.Item
+                    onClick={handleLocation}
+                    eventKey={index}
+                    key={`menu-${index}`}
+                  >
+                    <div className="my-3 d-flex">
+                      <div className="mr-3">{item.icon}</div>
+                      <div>
+                        <p>{item.text}</p>
                       </div>
-                    </Dropdown.Item>
-                  </>
+                    </div>
+                  </Dropdown.Item>
                 ))}
+                <Dropdown.Item onClick={() => setModalShow(true)} eventKey="1">
+                  <div className="my-3 d-flex">
+                    <div className="mr-3">
+                      <BoxArrowInRight></BoxArrowInRight>
+                    </div>
+                    <div>
+                      <p>Đăng Xuất</p>
+                    </div>
+                  </div>
+                </Dropdown.Item>
+                <ModelLogin
+                  show={modalShow}
+                  onHide={() => setModalShow(false)}
+                />
               </Popover>
             )}
           </Overlay>
