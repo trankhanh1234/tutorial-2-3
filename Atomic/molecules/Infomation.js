@@ -3,7 +3,7 @@ import Avarta from "../atoms/Avarta";
 
 function Infomation(props) {
   return (
-    <div className="mt-flex">
+    <div className="d-flex">
       <div className="mr-3">
         <Avarta />
       </div>
