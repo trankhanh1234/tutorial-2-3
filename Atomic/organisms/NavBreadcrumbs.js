@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 
 function NavBreadcrumbs({ children }) {
   return (
-    <div className="d-flex">
+    <div className="d-flex align-items-center">
       <div className="breadcrumb-nav mr-3">
         <HouseDoor></HouseDoor>
       </div>
-      <div className="breadcrumb-nav mr-3">Trang chủ</div>
+      <div className="breadcrumb-nav mr-3 text-muted">Trang chủ</div>
       <div className="breadcrumb-item-nav mr-3">
         <ArrowRight />
       </div>
