@@ -5,11 +5,17 @@ import { Col, Form, Row, Button } from "react-bootstrap";
 function StepCreateAccount(props) {
   const [state, setState] = React.useState({
     fullname: "",
+    fullnameError: false,
     name: "",
+    nameError: false,
     password: "",
+    passwordError: false,
     email: "",
+    emailError: false,
     comfirmPass: "",
+    comfirmPassError: false,
   });
+  const [disable, setDisable] = React.useState(true);
 
   const mesErr = {
     fullnameError: "Họ không được để trống",
@@ -19,48 +25,67 @@ function StepCreateAccount(props) {
     comfirmPassError: "Mật khẩu không khớp",
   };
 
+  const validateEmail = (email) => {
+    const pattern =
+      /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g;
+    const result = pattern.test(email);
+    if (result === true) {
+      setState({ ...state, emailError: false, email: email });
+    } else {
+      setState({ ...state, emailError: true, email: email });
+    }
+  };
+
   const handleInput = (event) => {
     const { name, value } = event.target;
     if (name === "fullname") {
-      setState({ ...state, fullname: value });
+      if (value === "" || value === null) {
+        setState({ ...state, fullnameError: true, fullname: value });
+      } else {
+        setState({ ...state, fullnameError: false, fullname: value });
+      }
     }
 
     if (name === "name") {
-      setState({ ...state, name: value });
+      if (value === "" || value === null) {
+        setState({ ...state, nameError: true, name: value });
+      } else {
+        setState({ ...state, nameError: false, name: value });
+      }
     }
 
     if (name === "password") {
-      setState({ ...state, password: value });
+      console.log(value.length);
+      if (value === "" || value === null || value.length < 6) {
+        setState({ ...state, passwordError: true, password: value });
+      } else {
+        setState({ ...state, passwordError: false, password: value });
+      }
     }
 
     if (name === "email") {
-      setState({ ...state, email: value });
+      validateEmail(value);
     }
 
     if (name === "comfirmPass") {
-      setState({ ...state, comfirmPass: value });
+      if (value === "" || value === null || value !== state.password) {
+        setState({ ...state, comfirmPassError: true, comfirmPass: value });
+      } else {
+        setState({ ...state, comfirmPassError: false, comfirmPass: value });
+      }
     }
-    console.log(state);
+    if (
+      state.fullnameError === false &&
+      state.passwordError === false &&
+      state.nameError === false &&
+      state.comfirmPassError === false &&
+      state.emailError === false
+    ) {
+      setDisable(false);
+    } else {
+      setDisable(true);
+    }
   };
-
-  React.useEffect(() => {
-    console.log(state.fullname);
-    if (state.fullname === "" || state.fullname) {
-      setState({ ...state, fullnameError: true });
-    }
-    if (state.name === "" || state.name === null) {
-      setState({ ...state, nameError: true });
-    }
-    if (state.password === "" || state.password === null) {
-      setState({ ...state, passwordError: true });
-    }
-    if (state.email === "" || state.email === null) {
-      setState({ ...state, emailError: true });
-    }
-    if (state.comfirmPass === "" || state.comfirmPass === null) {
-      setState({ ...state, comfirmPassError: true });
-    }
-  }, [state.fullname]);
 
   return (
     <>
@@ -165,7 +190,12 @@ function StepCreateAccount(props) {
         <Col></Col>
       </Row>
       <Row>
-        <Button>Đăng ký</Button>
+        <Button
+          disabled={disable ? true : false}
+          variant={disable ? "secondary" : "danger"}
+        >
+          Đăng ký
+        </Button>
       </Row>
     </>
   );
