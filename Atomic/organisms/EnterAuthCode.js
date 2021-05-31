@@ -31,14 +31,14 @@ function EnterAuthCode({ onHide }) {
           </Form.Label>
           <Form.Control value={auth} onChange={(e) => changeAuth(e)} />
         </Form.Group>
-        <Form.Group className="mb-3">
+        {/* <Form.Group className="mb-3">
           <Form.Label className="d-flex text-danger">
             Không nhận được mã xác thực?
           </Form.Label>
           <Form.Label className="d-flex text-danger">
             Gửi lại mã xác thực trong 12 giây
           </Form.Label>
-        </Form.Group>
+        </Form.Group> */}
         <Button
           disabled={validation !== 0}
           variant={validation === 0 ? "danger" : "secondary"}

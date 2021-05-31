@@ -7,7 +7,6 @@ function Infomation(props) {
       <div className="mr-3">
         <Avarta />
       </div>
-
       <div>
         <p className="d-flex justify-content-flex-start">Tài khoản của</p>
         <p style={{ fontSize: "18px" }}>Trần Quốc khánh</p>

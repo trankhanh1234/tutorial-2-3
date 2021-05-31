@@ -11,9 +11,7 @@ import StepCreateAccount from "./StepCreateAccount";
 function ModelLogin(props) {
   const { onHide } = props;
   const [step, setStep] = React.useState(0);
-
   const [phone, setphone] = React.useState("");
-  console.log("phone", phone);
   const titleModel = [
     {
       step: 0,

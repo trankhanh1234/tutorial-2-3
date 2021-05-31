@@ -9,11 +9,17 @@ import {
   BoxArrowInRight,
 } from "react-bootstrap-icons";
 import Dropdown from "react-bootstrap/Dropdown";
+
+import Overlay from "react-bootstrap/Overlay";
+import Popover from "react-bootstrap/Popover";
 import SpanTextWrap from "../atoms/SpanTextWrap";
+import ModelLogin from "../organisms/ModelLogin";
 
 const HeaderNavRight = () => {
   const [show, setShow] = React.useState(false);
-  const [modalShow, setModalShow] = React.useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const target = React.useRef(null);
   const menu = [
@@ -24,9 +30,6 @@ const HeaderNavRight = () => {
       icon: <BoxArrowInLeft></BoxArrowInLeft>,
     },
   ];
-  const handleLocation = () => {
-    setShow(false);
-  };
 
   return (
     <>
@@ -57,7 +60,7 @@ const HeaderNavRight = () => {
             </Dropdown.Toggle>
             <Dropdown.Menu>
               {menu.map((item, index) => (
-                <Dropdown.Item onClick={handleLocation} key={`menu-${index}`}>
+                <Dropdown.Item key={`menu-${index}`}>
                   <div className="my-3 d-flex">
                     <div className="mr-3">{item.icon}</div>
                     <div>
@@ -66,7 +69,7 @@ const HeaderNavRight = () => {
                   </div>
                 </Dropdown.Item>
               ))}
-              <Dropdown.Item onClick={() => setModalShow(true)} eventKey="1">
+              <Dropdown.Item onClick={handleShow} eventKey="1">
                 <div className="my-3 d-flex">
                   <div className="mr-3">
                     <BoxArrowInRight></BoxArrowInRight>
@@ -75,6 +78,7 @@ const HeaderNavRight = () => {
                     <p>Đăng Nhập</p>
                   </div>
                 </div>
+                <ModelLogin show={show} onHide={handleClose} />
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>

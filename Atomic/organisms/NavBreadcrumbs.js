@@ -1,5 +1,6 @@
-import React, { Children } from "react";
+import React from "react";
 import { HouseDoor, ArrowRight } from "react-bootstrap-icons";
+import PropTypes from "prop-types";
 
 function NavBreadcrumbs({ children }) {
   return (
@@ -17,3 +18,10 @@ function NavBreadcrumbs({ children }) {
 }
 
 export default NavBreadcrumbs;
+NavBreadcrumbs.propTypes = {
+  children: PropTypes.string,
+};
+
+NavBreadcrumbs.defaultProps = {
+  children: "Giỏ Hàng",
+};

@@ -5,19 +5,17 @@ import { Tag } from "react-bootstrap-icons";
 
 function Voucher({ voucher }) {
   return (
-    <>
-      <div
-        className="
+    <div
+      className="
           mt-specical-deal
           d-flex
           align-items-center
           my-1
         "
-      >
-        <Tag />
-        <p>{voucher}</p>
-      </div>
-    </>
+    >
+      <Tag />
+      <p>{voucher}</p>
+    </div>
   );
 }
 

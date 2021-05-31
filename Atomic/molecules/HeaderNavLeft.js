@@ -6,9 +6,6 @@ import InputSearch from "./InputSearch";
 
 const HeaderNavLeft = () => {
   const [state, setState] = React.useState("Hồ Chí Minh");
-  const [show, setShow] = React.useState(false);
-
-  const target = React.useRef(null);
 
   const menu = [{ text: "Hà Nội", icon: "" }, { text: "Hồ Chí Minh" }];
 
