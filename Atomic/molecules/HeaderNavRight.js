@@ -10,8 +10,6 @@ import {
 } from "react-bootstrap-icons";
 import Dropdown from "react-bootstrap/Dropdown";
 
-import Overlay from "react-bootstrap/Overlay";
-import Popover from "react-bootstrap/Popover";
 import SpanTextWrap from "../atoms/SpanTextWrap";
 import ModelLogin from "../organisms/ModelLogin";
 

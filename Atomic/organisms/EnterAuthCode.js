@@ -29,7 +29,11 @@ function EnterAuthCode({ onHide }) {
             {validation === 1 && "Mã xác thực không hợp lệ"}
             {validation === 2 && "sai mã xác thực"}
           </Form.Label>
-          <Form.Control value={auth} onChange={(e) => changeAuth(e)} />
+          <Form.Control
+            type="number"
+            value={auth}
+            onChange={(e) => changeAuth(e)}
+          />
         </Form.Group>
         {/* <Form.Group className="mb-3">
           <Form.Label className="d-flex text-danger">

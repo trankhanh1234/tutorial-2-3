@@ -52,6 +52,7 @@ const StepOneLogin = ({ nextStep, addPhone }) => {
         </Form.Label>
         <Form.Control
           name="phone"
+          type="number"
           value={phone}
           onChange={(e) => changePhoneNumber(e)}
           placeholder="000000000"
