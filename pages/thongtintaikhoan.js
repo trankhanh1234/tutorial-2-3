@@ -200,7 +200,7 @@ function thongtintaikhoan(props) {
   const [step, setStep] = React.useState(0);
   return (
     <main>
-      {step === 0 && <StepCreateAccount></StepCreateAccount>}
+      {step === 0 && <EnterAuthCode></EnterAuthCode>}
       {step === 1 && <StepTwoLogin nextStep={setStep} />}
       {step === 2 && <StepResetPassword></StepResetPassword>}
     </main>

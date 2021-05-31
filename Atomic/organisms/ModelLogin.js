@@ -1,7 +1,7 @@
-import React, { Children } from "react";
+import React from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { X } from "react-bootstrap-icons";
+import { X, ChevronLeft } from "react-bootstrap-icons";
 import { Col, Row } from "react-bootstrap";
 import StepOneLogin from "./StepOneLogin";
 import StepTwoLogin from "./StepTwoLogin";
@@ -24,22 +24,26 @@ function ModelLogin(props) {
       step: 1,
       title: "Chào mừng bạn đã trở lại với Meete",
       subTittle: "Đăng nhập với số điện thoại",
+      back: 0,
     },
     {
       step: 2,
       title: "Chào mừng bạn đã trở lại với Meete",
       subTittle: "Tạo mật khẩu mới cho tài khoản",
+      back: 1,
     },
     {
       step: 3,
       title: "Nhập mã xác thực",
       subTittle: "Kiểm tra mã OTP đã được gửi về email khanhtrandth@gmail.com",
+      back: 2,
     },
     {
       step: 4,
       title: "Tạo tài khoản mới",
       subTittle:
         "Số điện thoại 0347709649 chưa có tài khoản MEETE, tạo ngay nào!!!",
+      back: 0,
     },
   ];
 
@@ -59,16 +63,30 @@ function ModelLogin(props) {
         <Row>
           <Col xs={1} className="d-flex">
             {step !== 0 && (
-              <Button onClick={() => setStep(step - 1)} variant="light">
-                <X></X>
+              <Button
+                onClick={() => setStep(titleModel[step].back)}
+                variant="light"
+              >
+                <ChevronLeft></ChevronLeft>
               </Button>
             )}
           </Col>
           <Col xs={10}>
-            <h4>{titleModel[step].title}</h4>
-            <h6>
-              {titleModel[step].subTittle} {phone}
-            </h6>
+            {step === 4 ? (
+              <>
+                <h4>{titleModel[step].title}</h4>
+                <h6>
+                  Số điện thoại {phone} chưa có tài khoản MEETE, tạo ngay nào!!!
+                </h6>
+              </>
+            ) : (
+              <>
+                <h4>{titleModel[step].title}</h4>
+                <h6>
+                  {titleModel[step].subTittle} {phone}
+                </h6>
+              </>
+            )}
           </Col>
           <Col xs={1} className="d-flex justify-content-flex-end">
             <Button onClick={onHide} variant="light">

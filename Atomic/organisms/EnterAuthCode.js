@@ -4,7 +4,9 @@ import { Form, Button } from "react-bootstrap";
 function EnterAuthCode({ onHide }) {
   const [auth, setAuth] = React.useState("");
   const [validation, setValidation] = React.useState(0);
+
   const authCode = "123123";
+
   const changeAuth = (e) => {
     setAuth(e.target.value);
   };
@@ -18,6 +20,7 @@ function EnterAuthCode({ onHide }) {
       setValidation(0);
     }
   }, [auth]);
+
   return (
     <div>
       <Form>
@@ -27,6 +30,14 @@ function EnterAuthCode({ onHide }) {
             {validation === 2 && "sai mã xác thực"}
           </Form.Label>
           <Form.Control value={auth} onChange={(e) => changeAuth(e)} />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label className="d-flex text-danger">
+            Không nhận được mã xác thực?
+          </Form.Label>
+          <Form.Label className="d-flex text-danger">
+            Gửi lại mã xác thực trong 12 giây
+          </Form.Label>
         </Form.Group>
         <Button
           disabled={validation !== 0}

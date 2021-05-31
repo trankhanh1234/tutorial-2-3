@@ -70,15 +70,35 @@ header {
   white-space: nowrap;
   background: #fff;
   font-size: 1em;
+  width: 100%;
   box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
   color: #1e272c;
 }
 
 .mt-header-textWrap:hover {
   background: #e4e6eb;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #1e272c;
+}
+.mt-header-textWrap:active {
+  background: #e4e6eb;
+  border-color: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #1e272c;
 }
 .mt-header-textWrap span :hover {
   color: "red";
+}
+.btn-check:checked + .btn-primary,
+.btn-check:active + .btn-primary,
+.btn-primary:active,
+.btn-primary.active,
+.show > .btn-primary.dropdown-toggle {
+  background: #e4e6eb;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-color: 1px solid rgba(0, 0, 0, 0.1);
+
+  color: #1e272c;
 }
 img {
   max-width: 100%;

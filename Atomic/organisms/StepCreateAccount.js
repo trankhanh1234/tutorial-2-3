@@ -2,7 +2,7 @@ import React from "react";
 
 import { Col, Form, Row, Button } from "react-bootstrap";
 
-function StepCreateAccount(props) {
+function StepCreateAccount({ nextStep }) {
   const [state, setState] = React.useState({
     fullname: "",
     fullnameError: false,
@@ -38,6 +38,7 @@ function StepCreateAccount(props) {
 
   const handleInput = (event) => {
     const { name, value } = event.target;
+
     if (name === "fullname") {
       if (value === "" || value === null) {
         setState({ ...state, fullnameError: true, fullname: value });
@@ -56,7 +57,9 @@ function StepCreateAccount(props) {
 
     if (name === "password") {
       console.log(value.length);
-      if (value === "" || value === null || value.length < 6) {
+      if (value === "" || value === null) {
+        setState({ ...state, passwordError: true, password: value });
+      } else if (value.length < 6) {
         setState({ ...state, passwordError: true, password: value });
       } else {
         setState({ ...state, passwordError: false, password: value });
@@ -68,7 +71,9 @@ function StepCreateAccount(props) {
     }
 
     if (name === "comfirmPass") {
-      if (value === "" || value === null || value !== state.password) {
+      if (value === "" || value === null) {
+        setState({ ...state, comfirmPassError: true, comfirmPass: value });
+      } else if (value !== state.password) {
         setState({ ...state, comfirmPassError: true, comfirmPass: value });
       } else {
         setState({ ...state, comfirmPassError: false, comfirmPass: value });
@@ -83,8 +88,9 @@ function StepCreateAccount(props) {
     ) {
       setDisable(false);
     } else {
-      setDisable(true);
+      setDisable(false);
     }
+    console.log(disable);
   };
 
   return (
@@ -191,7 +197,8 @@ function StepCreateAccount(props) {
       </Row>
       <Row>
         <Button
-          disabled={disable ? true : false}
+          onClick={() => nextStep(3)}
+          disabled={disable}
           variant={disable ? "secondary" : "danger"}
         >
           Đăng ký

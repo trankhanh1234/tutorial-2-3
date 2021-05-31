@@ -6,11 +6,33 @@ const StepOneLogin = ({ nextStep, addPhone }) => {
   const [validation, setValidation] = React.useState(false);
 
   const changePhoneNumber = (e) => {
-    setPhone(e.target.value);
+    const { value } = e.target;
+    if (value.length === 10) {
+      setValidation(true);
+      setPhone(value);
+    } else {
+      setValidation(false);
+      setPhone(value);
+    }
   };
+  const listPhone = [
+    "0966536096",
+    "0966536097",
+    "0966536098",
+    "0966536099",
+    "0966536091",
+    "0966536092",
+  ];
   const handleStepLogin = (step) => {
-    addPhone(phone);
-    nextStep(step);
+    const checkPhone = listPhone.includes(phone);
+    console.log(checkPhone, "checkPhone");
+    if (checkPhone) {
+      addPhone(phone);
+      nextStep(1);
+    } else {
+      addPhone(phone);
+      nextStep(4);
+    }
   };
   React.useEffect(() => {
     if (phone.length === 10) {
@@ -29,6 +51,7 @@ const StepOneLogin = ({ nextStep, addPhone }) => {
           </p>
         </Form.Label>
         <Form.Control
+          name="phone"
           value={phone}
           onChange={(e) => changePhoneNumber(e)}
           placeholder="000000000"
