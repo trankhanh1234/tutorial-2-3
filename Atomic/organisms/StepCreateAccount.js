@@ -15,6 +15,7 @@ function StepCreateAccount({ nextStep }) {
     comfirmPass: "",
     comfirmPassError: false,
   });
+
   const [disable, setDisable] = React.useState(true);
 
   const mesErr = {
@@ -31,10 +32,8 @@ function StepCreateAccount({ nextStep }) {
     const result = pattern.test(email);
     if (result === true) {
       setState({ ...state, emailError: false, email: email });
-      handleButton();
     } else {
       setState({ ...state, emailError: true, email: email });
-      handleButton();
     }
   };
 

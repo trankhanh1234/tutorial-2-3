@@ -1,23 +1,10 @@
 import React from "react";
-import Link from "next/link";
 
-import {
-  Bell,
-  Bank,
-  Cart,
-  Wallet,
-  BoxArrowInLeft,
-  BoxArrowInRight,
-} from "react-bootstrap-icons";
-import Dropdown from "react-bootstrap/Dropdown";
-import Overlay from "react-bootstrap/Overlay";
-import Popover from "react-bootstrap/Popover";
-
-import SpanTextWrap from "../atoms/SpanTextWrap";
-import InputSearch from "../molecules/InputSearch";
-import ModelLogin from "./ModelLogin";
 import HeaderNavLeft from "../molecules/HeaderNavLeft";
 import HeaderNavRight from "../molecules/HeaderNavRight";
+import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
+import { Col, Row } from "react-bootstrap";
 
 function Header() {
   const [y, setY] = React.useState(0);
@@ -41,21 +28,23 @@ function Header() {
 
   return (
     <header>
-      <nav
-        className="navbar navbar-light bg-white header mt-header-header"
+      <Navbar
+        bg="white"
+        variant="light"
+        className="header mt-header-header"
         style={{ display: header, position: "fixed" }}
       >
-        <div className="container-fluid">
-          <div className="row flex-grow-1 undefined">
-            <div className="col-12 col-sm-8 col-md-8 mt-header">
+        <Container fluid>
+          <Row className="flex-grow-1 undefined">
+            <Col sm={8} className="d-flex align-items-center">
               <HeaderNavLeft></HeaderNavLeft>
-            </div>
-            <div className="col-12 col-sm-4 col-md-4 mt-header">
+            </Col>
+            <Col sm={4} md={4} className="d-flex align-items-center">
               <HeaderNavRight></HeaderNavRight>
-            </div>
-          </div>
-        </div>
-      </nav>
+            </Col>
+          </Row>
+        </Container>
+      </Navbar>
     </header>
   );
 }

@@ -17,8 +17,7 @@ function CardVoucher() {
             </div>
             <div
               className="
-          mt-top-date
-          jutyfi
+          mt-top-date       
           d-flex
           justify-content-center
           align-items-center

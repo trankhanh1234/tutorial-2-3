@@ -1,4 +1,5 @@
 import React from "react";
+import { Col, Container, Row } from "react-bootstrap";
 import MenuList from "../molecules/MenuList";
 import AppBar from "../organisms/AppBar";
 import CardVoucher from "../organisms/CardVoucher";
@@ -7,16 +8,16 @@ import Navigation from "../organisms/Navigation";
 
 function Main(props) {
   return (
-    <div className="container">
-      <div className="my-3">
+    <Container>
+      <Row className="my-3">
         <NavBreadcrumbs></NavBreadcrumbs>
-      </div>
+      </Row>
       <AppBar></AppBar>
-      <div className="row mb-3 mt-4">
-        <div className="col-md-4 col-lg-3">
+      <Row className="mb-3 mt-4">
+        <Col md={4} lg={3}>
           <MenuList></MenuList>
-        </div>
-        <div className="col-md-8 col-lg-9">
+        </Col>
+        <Col md={8} lg={9}>
           <div className="bg-white rounded">
             <div className="mt-card-deal">
               <div className="d-flex flex-column align-items-center w-100 p-3">
@@ -25,9 +26,9 @@ function Main(props) {
             </div>
             <Navigation></Navigation>
           </div>
-        </div>
-      </div>
-    </div>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

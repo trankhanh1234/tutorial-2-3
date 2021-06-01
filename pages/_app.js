@@ -7,6 +7,7 @@ import AppBar from "../Atomic/organisms/AppBar";
 import MenuList from "../Atomic/molecules/MenuList";
 
 import "../styles/index.scss";
+import { Col, Row } from "react-bootstrap";
 
 class MyApp extends App {
   render() {
@@ -19,18 +20,18 @@ class MyApp extends App {
         </Head>
         <Header />
         <div className="container" style={{ paddingTop: "100px" }}>
-          <div>
+          <Row>
             <NavBreadcrumbs></NavBreadcrumbs>
-          </div>
+          </Row>
           <AppBar></AppBar>
-          <div className="row mb-3 mt-4">
-            <div className="col-md-4 col-lg-3">
+          <Row className="mb-3 mt-4">
+            <Col md={4} lg={3}>
               <MenuList></MenuList>
-            </div>
-            <div className="col-md-8 col-lg-9">
+            </Col>
+            <Col md={8} lg={9}>
               <Component {...pageProps} />
-            </div>
-          </div>
+            </Col>
+          </Row>
           <div className="mt-header-mes">
             <svg
               xmlns="http://www.w3.org/2000/svg"
