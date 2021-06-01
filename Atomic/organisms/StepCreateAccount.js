@@ -31,64 +31,82 @@ function StepCreateAccount({ nextStep }) {
     const result = pattern.test(email);
     if (result === true) {
       setState({ ...state, emailError: false, email: email });
+      handleButton();
     } else {
       setState({ ...state, emailError: true, email: email });
+      handleButton();
     }
   };
 
   const handleInput = (event) => {
     const { name, value } = event.target;
 
-    if (name === "fullname") {
-      if (value === "" || value === null) {
-        setState({ ...state, fullnameError: true, fullname: value });
-      } else {
-        setState({ ...state, fullnameError: false, fullname: value });
-      }
+    switch (name) {
+      case "fullname":
+        if (value === "" || !value) {
+          setState({ ...state, fullnameError: true, fullname: value });
+        } else {
+          setState({ ...state, fullnameError: false, fullname: value });
+        }
+        break;
+      case "name":
+        if (value === "" || !value) {
+          setState({ ...state, nameError: true, name: value });
+        } else {
+          setState({ ...state, nameError: false, name: value });
+        }
+        break;
+      case "password":
+        if (value === "" || !value) {
+          setState({ ...state, passwordError: true, password: value });
+        } else if (value.length < 6) {
+          setState({ ...state, passwordError: true, password: value });
+        } else {
+          setState({ ...state, passwordError: false, password: value });
+        }
+        break;
+      case "email":
+        validateEmail(value);
+        break;
+      case "comfirmPass":
+        if (value === "" || !value) {
+          setState({
+            ...state,
+            comfirmPassError: true,
+            comfirmPass: value,
+          });
+        } else if (value !== state.password) {
+          setState({
+            ...state,
+            comfirmPassError: true,
+            comfirmPass: value,
+          });
+        } else {
+          setState({
+            ...state,
+            comfirmPassError: false,
+            comfirmPass: value,
+          });
+        }
+        break;
+      default:
+        "";
     }
-
-    if (name === "name") {
-      if (value === "" || value === null) {
-        setState({ ...state, nameError: true, name: value });
-      } else {
-        setState({ ...state, nameError: false, name: value });
-      }
-    }
-
-    if (name === "password") {
-      if (value === "" || value === null) {
-        setState({ ...state, passwordError: true, password: value });
-      } else if (value.length < 6) {
-        setState({ ...state, passwordError: true, password: value });
-      } else {
-        setState({ ...state, passwordError: false, password: value });
-      }
-    }
-
-    if (name === "email") {
-      validateEmail(value);
-    }
-
-    if (name === "comfirmPass") {
-      if (value === "" || value === null) {
-        setState({ ...state, comfirmPassError: true, comfirmPass: value });
-      } else if (value !== state.password) {
-        setState({ ...state, comfirmPassError: true, comfirmPass: value });
-      } else {
-        setState({ ...state, comfirmPassError: false, comfirmPass: value });
-      }
-    }
+    handleButton();
+  };
+  const handleButton = () => {
     if (
-      state.fullnameError === false &&
-      state.passwordError === false &&
-      state.nameError === false &&
-      state.comfirmPassError === false &&
-      state.emailError === false
+      !!state.fullnameError &&
+      !!state.passwordError &&
+      !!state.nameError &&
+      !!state.comfirmPassError &&
+      !!state.emailError
     ) {
-      setDisable(false);
-    } else {
       setDisable(true);
+    } else {
+      setDisable(false);
     }
+    console.log("disable", disable);
   };
 
   return (

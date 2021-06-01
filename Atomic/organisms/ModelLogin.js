@@ -8,7 +8,6 @@ import StepTwoLogin from "./StepTwoLogin";
 import StepResetPassword from "./StepResetPassword";
 import EnterAuthCode from "./EnterAuthCode";
 import StepCreateAccount from "./StepCreateAccount";
-import Dialog from "@material-ui/core/Dialog";
 
 function ModelLogin(props) {
   const [step, setStep] = React.useState(0);
