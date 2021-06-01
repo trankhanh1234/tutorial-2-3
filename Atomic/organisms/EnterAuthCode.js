@@ -2,13 +2,19 @@ import React from "react";
 import { Form, Button } from "react-bootstrap";
 
 function EnterAuthCode({ onHide }) {
+  const [state, setState] = React.useState(false);
   const [auth, setAuth] = React.useState("");
   const [validation, setValidation] = React.useState(0);
-
+  const [timeout, setTimeOut] = React.useState(30);
   const authCode = "123123";
 
   const changeAuth = (e) => {
     setAuth(e.target.value);
+  };
+  const handleTimeOut = () => {
+    setTimeout(() => {
+      setTimeOut(timeout - 1);
+    }, 1000);
   };
 
   React.useEffect(() => {
@@ -20,6 +26,18 @@ function EnterAuthCode({ onHide }) {
       setValidation(0);
     }
   }, [auth]);
+
+  const resetAuthCode = () => {
+    setState(false);
+    setTimeOut(30);
+  };
+  React.useEffect(() => {
+    if (timeout === 0) {
+      setState(true);
+    } else {
+      handleTimeOut();
+    }
+  }, [timeout]);
 
   return (
     <div>
@@ -35,15 +53,30 @@ function EnterAuthCode({ onHide }) {
             onChange={(e) => changeAuth(e)}
           />
         </Form.Group>
-        {/* <Form.Group className="mb-3">
-          <Form.Label className="d-flex text-danger">
-            Không nhận được mã xác thực?
-          </Form.Label>
-          <Form.Label className="d-flex text-danger">
-            Gửi lại mã xác thực trong 12 giây
-          </Form.Label>
-        </Form.Group> */}
+        {!state ? (
+          <Form.Group className="mb-3">
+            <Form.Label className="d-flex justify-content-center">
+              Không nhận được mã xác thực?
+            </Form.Label>
+            <Form.Label className="d-fle justify-content-center">
+              Gửi lại mã xác thực trong {timeout} giây
+            </Form.Label>
+          </Form.Group>
+        ) : (
+          <Form.Group className="mb-3">
+            <Form.Label className="d-flex">
+              Không Nhận được mã xác thực?
+            </Form.Label>
+            <Form.Label
+              onClick={resetAuthCode}
+              className="d-flex  text-danger breadcrumb-item-nav "
+            >
+              Gui lai
+            </Form.Label>
+          </Form.Group>
+        )}
         <Button
+          className="full-width"
           disabled={validation !== 0}
           variant={validation === 0 ? "danger" : "secondary"}
           onClick={() => onHide()}

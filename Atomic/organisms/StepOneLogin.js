@@ -2,17 +2,17 @@ import React from "react";
 import { Form, Button } from "react-bootstrap";
 
 const StepOneLogin = ({ nextStep, addPhone }) => {
-  const [phone, setPhone] = React.useState("");
+  const [state, setState] = React.useState({ phone: "", phoneErr: false });
   const [validation, setValidation] = React.useState(false);
 
   const changePhoneNumber = (e) => {
     const { value } = e.target;
     if (value.length === 10) {
       setValidation(true);
-      setPhone(value);
+      setState({ ...state, phone: value, phoneErr: false });
     } else {
       setValidation(false);
-      setPhone(value);
+      setState({ ...state, phone: value, phoneErr: true });
     }
   };
   const listPhone = [
@@ -24,42 +24,37 @@ const StepOneLogin = ({ nextStep, addPhone }) => {
     "0966536092",
   ];
   const handleStepLogin = (step) => {
-    const checkPhone = listPhone.includes(phone);
-    console.log(checkPhone, "checkPhone");
+    const checkPhone = listPhone.includes(state.phone);
     if (checkPhone) {
-      addPhone(phone);
+      addPhone(state.phone);
       nextStep(1);
     } else {
-      addPhone(phone);
+      addPhone(state.phone);
       nextStep(4);
     }
   };
-  React.useEffect(() => {
-    if (phone.length === 10) {
-      setValidation(true);
-    } else {
-      setValidation(false);
-    }
-  }, [phone]);
+
+  React.useEffect(() => {}, []);
   return (
     <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label className="d-flex">
           Nhập số điện thoại
           <p className="text-danger">
-            {validation ? "" : "(Số điện thoại không hợp lệ)"}
+            {!state.phoneErr ? "" : "(Số điện thoại không hợp lệ)"}
           </p>
         </Form.Label>
         <Form.Control
           name="phone"
           type="number"
-          value={phone}
+          value={state.phone}
           onChange={(e) => changePhoneNumber(e)}
           placeholder="000000000"
         />
       </Form.Group>
       <Button
         disabled={!validation}
+        className="full-width"
         variant={validation ? "danger" : "secondary"}
         onClick={() => handleStepLogin(1)}
         type="submit"

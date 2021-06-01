@@ -4,31 +4,30 @@ import { Form, Button } from "react-bootstrap";
 const StepTwoLogin = ({ nextStep, onHide }) => {
   const passwordUse = "123qwe$%^";
 
-  const [password, setPassword] = React.useState("");
-  const [validation, setValidation] = React.useState(0);
+  const [state, setState] = React.useState({
+    password: "",
+    passwordErr: false,
+  });
+  const [disable, setDisable] = React.useState(true);
 
   const changePassword = (e) => {
-    setPassword(e.target.value);
+    const { value } = e.target;
+    if (value.length <= 6) {
+      setState({ ...state, password: value, passwordErr: 1 });
+      setDisable(true);
+    } else {
+      setState({ ...state, password: value, passwordErr: 0 });
+      setDisable(false);
+    }
   };
 
   const handleStepLogin = (step) => {
-    console.log("password", password);
-    if (password === passwordUse) {
-      console.log("checkpass");
+    if (state.password === passwordUse) {
       onHide();
     } else {
-      console.log("checkpass");
-      setValidation(2);
+      setState({ ...state, passwordErr: 2 });
     }
   };
-
-  React.useEffect(() => {
-    if (password.length <= 6) {
-      setValidation(1);
-    } else {
-      setValidation(0);
-    }
-  }, [password]);
 
   return (
     <Form>
@@ -36,15 +35,15 @@ const StepTwoLogin = ({ nextStep, onHide }) => {
         <Form.Label className="d-flex">
           Mật khẩu{" "}
           <p className="text-danger">
-            {validation === 0 && ""}
-            {validation === 1 && "(Mật khẩu không hợp lệ)"}
-            {validation === 2 && "(Sai số điện thoại hoặc mật khẩu)"}
+            {state.passwordErr === 0 && ""}
+            {state.passwordErr === 1 && "(Mật khẩu không hợp lệ)"}
+            {state.passwordErr === 2 && "(Sai mật khẩu)"}
           </p>
         </Form.Label>
         <Form.Control
-          value={password}
+          value={state.password}
+          type="password"
           onChange={(e) => changePassword(e)}
-          placeholder="000000000"
         />
       </Form.Group>
       <Form.Group
@@ -54,8 +53,9 @@ const StepTwoLogin = ({ nextStep, onHide }) => {
         <a onClick={() => nextStep(2)}>Quên Mật Khẩu?</a>
       </Form.Group>
       <Button
-        disabled={validation === 0 ? "" : true}
-        variant={validation === 0 ? "danger" : "secondary"}
+        disabled={!disable ? "" : true}
+        className="full-width"
+        variant={!disable ? "danger" : "secondary"}
         onClick={() => handleStepLogin(2)}
         type="submit"
       >

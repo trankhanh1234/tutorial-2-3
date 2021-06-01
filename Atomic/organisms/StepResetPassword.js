@@ -45,8 +45,8 @@ const StepResetPassword = ({ nextStep }) => {
         </Form.Label>
         <Form.Control
           value={newpassword}
+          type="password"
           onChange={(e) => changeNewPassword(e)}
-          placeholder="000000000"
         />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -60,11 +60,12 @@ const StepResetPassword = ({ nextStep }) => {
         </Form.Label>
         <Form.Control
           value={password}
+          type="password"
           onChange={(e) => changePassword(e)}
-          placeholder="000000000"
         />
       </Form.Group>
       <Button
+        className="full-width"
         disabled={checkPass === 0 ? "" : true}
         variant={checkPass === 0 ? "danger" : "secondary"}
         onClick={() => nextStep(3)}

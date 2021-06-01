@@ -56,7 +56,6 @@ function StepCreateAccount({ nextStep }) {
     }
 
     if (name === "password") {
-      console.log(value.length);
       if (value === "" || value === null) {
         setState({ ...state, passwordError: true, password: value });
       } else if (value.length < 6) {
@@ -88,9 +87,8 @@ function StepCreateAccount({ nextStep }) {
     ) {
       setDisable(false);
     } else {
-      setDisable(false);
+      setDisable(true);
     }
-    console.log(disable);
   };
 
   return (
@@ -127,6 +125,7 @@ function StepCreateAccount({ nextStep }) {
             </Form.Label>
             <Form.Control
               name="password"
+              type="password"
               value={state.password}
               onChange={(e) => {
                 handleInput(e);
@@ -167,6 +166,7 @@ function StepCreateAccount({ nextStep }) {
             </Form.Label>
             <Form.Control
               name="comfirmPass"
+              type="password"
               value={state.comfirmPass}
               onChange={(e) => handleInput(e)}
             />
@@ -199,6 +199,7 @@ function StepCreateAccount({ nextStep }) {
         <Button
           onClick={() => nextStep(3)}
           disabled={disable}
+          className="full-width"
           variant={disable ? "secondary" : "danger"}
         >
           Đăng ký

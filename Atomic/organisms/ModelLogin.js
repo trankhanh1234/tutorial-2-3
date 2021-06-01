@@ -8,8 +8,9 @@ import StepTwoLogin from "./StepTwoLogin";
 import StepResetPassword from "./StepResetPassword";
 import EnterAuthCode from "./EnterAuthCode";
 import StepCreateAccount from "./StepCreateAccount";
+import Dialog from "@material-ui/core/Dialog";
+
 function ModelLogin(props) {
-  const { onHide } = props;
   const [step, setStep] = React.useState(0);
   const [phone, setphone] = React.useState("");
   const titleModel = [
@@ -57,7 +58,7 @@ function ModelLogin(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Body>
+      <Modal.Body style={{ minHeight: 410 }}>
         <Row>
           <Col xs={1} className="d-flex">
             {step !== 0 && (
@@ -87,7 +88,7 @@ function ModelLogin(props) {
             )}
           </Col>
           <Col xs={1} className="d-flex justify-content-flex-end">
-            <Button onClick={onHide} variant="light">
+            <Button onClick={props.onHide} variant="light">
               <X></X>
             </Button>
           </Col>
@@ -96,15 +97,20 @@ function ModelLogin(props) {
           {step === 0 && (
             <StepOneLogin addPhone={setphone} nextStep={setStep}></StepOneLogin>
           )}
-          {step === 1 && <StepTwoLogin nextStep={setStep} />}
+          {step === 1 && (
+            <StepTwoLogin nextStep={setStep} onHide={props.onHide} />
+          )}
           {step === 2 && (
             <StepResetPassword
-              onHide={onHide}
+              onHide={props.onHide}
               nextStep={setStep}
             ></StepResetPassword>
           )}
           {step === 3 && (
-            <EnterAuthCode onHide={onHide} nextStep={setStep}></EnterAuthCode>
+            <EnterAuthCode
+              onHide={props.onHide}
+              nextStep={setStep}
+            ></EnterAuthCode>
           )}
           {step === 4 && (
             <StepCreateAccount nextStep={setStep}></StepCreateAccount>

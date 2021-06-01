@@ -15,11 +15,6 @@ import ModelLogin from "../organisms/ModelLogin";
 
 const HeaderNavRight = () => {
   const [show, setShow] = React.useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const target = React.useRef(null);
   const menu = [
     { text: "Thông tin tài khoản", icon: <Bank /> },
     { text: "Ví", icon: <Wallet></Wallet> },
@@ -67,7 +62,7 @@ const HeaderNavRight = () => {
                   </div>
                 </Dropdown.Item>
               ))}
-              <Dropdown.Item onClick={handleShow} eventKey="1">
+              <Dropdown.Item onClick={() => setShow(true)} eventKey="1">
                 <div className="my-3 d-flex">
                   <div className="mr-3">
                     <BoxArrowInRight></BoxArrowInRight>
@@ -76,10 +71,10 @@ const HeaderNavRight = () => {
                     <p>Đăng Nhập</p>
                   </div>
                 </div>
-                <ModelLogin show={show} onHide={handleClose} />
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
+          <ModelLogin show={show} onHide={() => setShow(!show)} />
         </div>
       </div>
     </>
