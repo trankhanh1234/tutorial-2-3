@@ -37,7 +37,7 @@ function StepCreateAccount({ nextStep }) {
     }
   };
 
-  const handleInput = (event) => {
+  const handleInput = async (event) => {
     const { name, value } = event.target;
 
     switch (name) {

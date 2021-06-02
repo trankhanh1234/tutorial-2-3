@@ -16,7 +16,7 @@ class MyApp extends App {
     return (
       <>
         <Head>
-          <title>Check your Priviledge</title>
+          <title>Meete</title>
         </Head>
         <Header />
         <div className="container" style={{ paddingTop: "100px" }}>
